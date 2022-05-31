@@ -97,34 +97,15 @@ header .logo {
     color: red;
 }
 
-.toggle-btn{
-    color: #000;
-    min-width: 40px;
-    height: 40px;
-    background-color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    cursor: pointer;
-    box-shadow: 0 0 10px 0px rgba(0,0,0, 0.5);
-    transition: 0.3s;
-}
-
-.toggle-btn:hover {
-    filter: brightness(97%);
-}
-
 /*   hERO   */
 
 .hero {
     padding: 18rem 0;
     width: 100%;
+    height: 100%;
     overflow: hidden;
     background-image: url("../assets/img/background-hero.jpg");
     background-position: center center;
-    height: 1000px;
     font-family: 'Augusta', sans-serif;
 }
 
@@ -151,9 +132,48 @@ header .logo {
     font-size: 1.4rem;
 }
 
+.hero .play, a{
+    z-index: 10;
+}
+
+/* Fogs */
+
+.hero .fog-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero .fog-img{
+    position: absolute;
+    height: 100vh;
+    width: 300vw;
+    z-index: 2;
+}
+
+.hero .fog-img-first {
+    background: url("../assets/img/fog-one.png");
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-position: center;
+    animation: movefog 60s linear infinite;
+}
+
+@keyframes movefog {
+    
+    0% {
+        transform: translate3d(0,0,0);
+    }
+
+    100% {
+        transform: translate3d(-200vw, 0, 0);
+    }
+}
 
 /* ------------------------------------------------------------------------------------------ */
-/* -----------------------------characters.html---------------------------------------------- */
+/* -----------------------------character-select.html---------------------------------------- */
 /* ------------------------------------------------------------------------------------------ */
 .characters {
     padding: 18rem 0;
