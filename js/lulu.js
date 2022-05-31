@@ -13,31 +13,6 @@ class Enemy{
     }
 }
 
-class Item {
-    constructor(id, name) {
-      this.id = id;
-      this.name = name;
-    }
-}
-  
-class ItemModelCollection {
-    constructor() {
-      this.items = [];
-    }
-    addItem(id, name) {
-      if (Array.isArray(this.items)) {
-        this.items.push(new Item(id, name));
-      }
-    }
-    removeItem(id) {
-      if (Array.isArray(this.items)) {
-        this.items = this.items.filter( i => i.id !== id);
-      }
-    }
-  }
-  
-
-
 
   //Lulu
 let lulu = new Character("Lulu", 14);
@@ -75,12 +50,28 @@ function fightLuluSkull(){
 let buttonSkull = document.getElementById("skull");
 buttonSkull.addEventListener("click", fightLuluSkull);
 
+let potionsArray = [];
+let lastIndex = false;
 
-/*
-  //Create Item
-  const itemCollection = new ItemModelCollection();
-  document.getElementById('addItem').onclick = (e) => {
-    const id = itemCollection.items.length; // obviously figure out a better id generator
-    itemCollection.addItem(id, `Item Number ${id}`);
-    console.log(itemCollection);
-  };*/
+let buttonPotion = document.getElementById("potion");
+buttonPotion.addEventListener("click", () => {
+        potionsArray.push("Potion");
+        alert('You obtained a potion!');
+        console.log(potionsArray);
+    
+});
+
+
+let buttonUsePotion = document.getElementById("potion-use");
+buttonUsePotion.addEventListener("click", () => {
+    if(potionsArray.length < 1 || potionsArray == undefined){
+        alert(`You don't have any more potion left to use!`);
+    } else {
+        alert('You used a potion!');
+        potionsArray.pop();
+        console.log(potionsArray);
+    }
+    
+});
+
+console.log(potionsArray);
