@@ -13,45 +13,28 @@ class Enemy{
     }
 }
 
-class Item {
-    constructor(id, name) {
-      this.id = id;
-      this.name = name;
-    }
-}
-  
-class ItemModelCollection {
-    constructor() {
-      this.items = [];
-    }
-    addItem(id, name) {
-      if (Array.isArray(this.items)) {
-        this.items.push(new Item(id, name));
-      }
-    }
-    removeItem(id) {
-      if (Array.isArray(this.items)) {
-        this.items = this.items.filter( i => i.id !== id);
-      }
-    }
-  }
-  
+
+let cundo = new Character("Cundo", 10);
 
 
-  let cundo = new Character("Cundo", 10);
-
-
-    document.getElementById("one").innerHTML = `
-    <img src="../assets/img/first-character.png"/>
-    <h3>Name: ${cundo.name}</h3>
-    <br>
-    <h3>ATK: ${cundo.atk}</h3>
-    <img src="../assets/img/pjone.png"/>
-    <br>
-    <button id="cundo">Select</button>
-    `;
+document.getElementById("one").innerHTML = `
+<img src="../assets/img/first-character.png"/>
+<h3>Name: ${cundo.name}</h3>
+<br>
+<h3>ATK: ${cundo.atk}</h3>
+<img src="../assets/img/pjone.png"/>
+<br>
+<button id="cundo">Select</button>
+`;
 
 console.log(cundo);
+
+//Potions
+function potion(){
+        return new Item(1, "Potion");
+}
+
+
 
 function fightCundoSkull(){
         let skull = new Enemy("Skull", 5, 5, 5);
@@ -69,15 +52,55 @@ function fightCundoSkull(){
              alert('You fight against Skull and lost!');
              console.log('XD');
         }
-    }
+}
+
+
+
 
 let buttonSkull = document.getElementById("skull");
 buttonSkull.addEventListener("click", fightCundoSkull);
 
-   //Create Item
-   /*const itemCollection = new ItemModelCollection();
-   document.getElementById('addItem').onclick = (e) => {
-     const id = itemCollection.items.length; // obviously figure out a better id generator
-     itemCollection.addItem(id, `Item Number ${id}`);
-     console.log(itemCollection);
-   };*/
+
+let potionsArray = [];
+let lastIndex = false;
+
+let buttonPotion = document.getElementById("potion");
+buttonPotion.addEventListener("click", () => {
+        potionsArray.push("Potion");
+        alert('You obtained a potion!');
+        console.log(potionsArray);
+    
+});
+
+
+let buttonUsePotion = document.getElementById("potion-use");
+buttonUsePotion.addEventListener("click", () => {
+    if(potionsArray.length < 1 || potionsArray == undefined){
+        alert(`You don't have any more potion left to use!`);
+    } else {
+        alert('You used a potion!');
+        potionsArray.pop();
+        console.log(potionsArray);
+    }
+    
+});
+
+console.log(potionsArray);
+
+
+
+
+
+
+//Display
+/*
+function disp(){
+  var str='';
+  str = 'total number of elements in data array : ' + data.length + '<br>';
+  for (i=0;i<data.length;i++) 
+  { 
+  str += i + ':'+data[i] + " <a href=# onClick='remove_element("+data.indexOf(data[i])+")'> Remove</a> " + "<br >";  // adding each element with key number to variable
+  } 
+  
+  document.getElementById('disp').innerHTML=str; // Display the elements of the array
+  }*/
