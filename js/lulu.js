@@ -1,13 +1,16 @@
 // Classes
 class Character {
-    constructor(name, atk){
+    constructor(icon, name, atk, spray){
+        this.icon = icon;
         this.name = name;
         this.atk = atk;
+        this.spray = spray;
     }
 }
 
 class Enemy{
-    constructor(name,atk){
+    constructor(icon, name,atk){
+        this.icon = icon;
         this.name = name;
         this.atk = atk;
     }
@@ -15,30 +18,36 @@ class Enemy{
 
 
   //Lulu
-let lulu = new Character("Lulu", 14);
+let lulu = new Character('../assets/img/third-character.png',"Lulu", 14, '../assets/img/pjthree.png');
         
 document.getElementById("three").innerHTML = `
-    <img src="../assets/img/third-character.png"/>
+    <img src="${lulu.icon}"/>
     <h3>Name: ${lulu.name}</h3>
     <br>
     <h3>ATK: ${lulu.atk}</h3>
-    <img src="../assets/img/pjthree.png"/>
+    <img src="${lulu.spray}"/>
     <br>
-    <button id="lulu"">Select</button>
     `;
 
 console.log(lulu);
 
-function fightLuluSkull(){
-    let skull = new Enemy("Skull", 5, 5, 5);
-    
-    console.log(skull);
-    
-        
-    if(lulu.atk > skull.atk){
+
+let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
+
+document.getElementById('enemy-one').innerHTML = `
+    <img src="${zombie.icon}" class="zombie">
+    <h3>ATK: ${zombie.atk}</h3>
+    <button id="zombie" class="fight-one">Fight</button>
+`;
+
+
+function fightLuluZombie(){
+    console.log(zombie);
+     
+    if(lulu.atk > zombie.atk){
         alert('You fight against Skull and won!');
         console.log('You won and if this code works, you deserve ice cream');
-    } else if(lulu.atk = skull.atk){
+    } else if(lulu.atk = zombie.atk){
         alert('You fight against Skull and the result was a draw! \n No xp gained');
         console.log('If char.atk > skull.atk then its not working yet lol');
     } else {
@@ -47,8 +56,8 @@ function fightLuluSkull(){
         }
     }
 
-let buttonSkull = document.getElementById("skull");
-buttonSkull.addEventListener("click", fightLuluSkull);
+let buttonZombie = document.getElementById("zombie");
+buttonZombie.addEventListener("click", fightLuluZombie);
 
 let potionsArray = [];
 let lastIndex = false;
