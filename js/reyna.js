@@ -82,3 +82,17 @@ buttonUsePotion.addEventListener("click", () => {
 });
 
 console.log(potionsArray);
+
+//Xp System?
+
+/*
+if(cundo.xp = 100){
+    cundo.atk += 1;
+    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
+} else if (cundo.xp = 200) {
+    cundo.atk += 1;
+    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
+
+let level;
+let levelTwo;
+}*/

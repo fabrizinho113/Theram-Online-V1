@@ -96,4 +96,7 @@ if(cundo.xp = 100){
 } else if (cundo.xp = 200) {
     cundo.atk += 1;
     alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
+
+let level;
+let levelTwo;
 }*/
