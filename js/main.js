@@ -1,70 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-// Classes
 class Character {
-    constructor(name, atk){
+    constructor(icon, name, atk, spray){
+        this.icon = icon;
         this.name = name;
         this.atk = atk;
+        this.spray = spray;
     }
 }
 
-class Enemy{
-    constructor(name,atk){
-        this.name = name;
-        this.atk = atk;
-    }
-}
-
-class Item {
-    constructor(id, name) {
-      this.id = id;
-      this.name = name;
-    }
-}
-  
-class ItemModelCollection {
-    constructor() {
-      this.items = [];
-    }
-    addItem(id, name) {
-      if (Array.isArray(this.items)) {
-        this.items.push(new Item(id, name));
-      }
-    }
-    removeItem(id) {
-      if (Array.isArray(this.items)) {
-        this.items = this.items.filter( i => i.id !== id);
-      }
-    }
-  }
-  
 
 //Personajes
 
 //Cundo
 
-let cundo = new Character("Cundo", 10);
+let cundo = new Character('../assets/img/first-character.png',"Cundo", 11, "../assets/img/pjone.png");
+
 
 document.getElementById("one").innerHTML = `
-    <img src="../assets/img/first-character.png"/>
-    <h3>Name: ${cundo.name}</h3>
-    <br>
-    <h3>ATK: ${cundo.atk}</h3>
-    <img src="../assets/img/pjone.png"/>
-    <br>
-    <button id="cundo">Select</button>
-    `;
+<img src="${cundo.icon}"/>
+<h3>Name: ${cundo.name}</h3>
+<br>
+<h3>ATK: ${cundo.atk}</h3>
+<img src="${cundo.spray}"/>
+<br>
+<button id="cundo">Select</button>
+`;
 console.log(cundo);
 
 //Reyna
-let reyna = new Character("Reyna", 10);
+let reyna = new Character('../assets/img/second-character.png',"Reyna", 10, '../assets/img/pjtwo.png');
     
 document.getElementById("two").innerHTML = `
-    <img src="../assets/img/second-character.png"/>
+    <img src="${reyna.icon}"/>
     <h3>Name: ${reyna.name}</h3>
     <br>
     <h3>ATK: ${reyna.atk}</h3>
-    <img src="../assets/img/pjtwo.png"/>
+    <img src="${reyna.spray}"/>
     <br>
     <button id="reyna">Select</button>
     `;
@@ -73,14 +45,14 @@ console.log(reyna);
 
 
 //Lulu
-let lulu = new Character("Lulu", 14);
+let lulu = new Character('../assets/img/third-character.png',"Lulu", 14,'../assets/img/pjthree.png');
         
 document.getElementById("three").innerHTML = `
-    <img src="../assets/img/third-character.png"/>
+    <img src="${lulu.icon}"/>
     <h3>Name: ${lulu.name}</h3>
     <br>
     <h3>ATK: ${lulu.atk}</h3>
-    <img src="../assets/img/pjthree.png"/>
+    <img src="${lulu.spray}"/>
     <br>
     <button id="lulu"">Select</button>
     `;
@@ -93,43 +65,16 @@ console.log(lulu);
 function characterOne(){
 
     window.location.href = "../pages/character-cundo.html";
-    document.getElementById("one").innerHTML = `
-    <img src="../assets/img/first-character.png"/>
-    <h3>Name: ${cundo.name}</h3>
-    <br>
-    <h3>ATK: ${cundo.atk}</h3>
-    <img src="../assets/img/pjone.png"/>
-    <br>
-    <button id="cundo">Select</button>
-    `;
 }
 
 function characterTwo(){
 
     window.location.href = "../pages/character-reyna.html";
-    document.getElementById("two").innerHTML = `
-    <img src="../assets/img/second-character.png"/>
-    <h3>Name: ${reyna.name}</h3>
-    <br>
-    <h3>ATK: ${reyna.atk}</h3>
-    <img src="../assets/img/pjtwo.png"/>
-    <br>
-    <button id="reyna">Select</button>
-    `;
 }
 
 function characterThree(){
 
     window.location.href = "../pages/character-lulu.html";
-    document.getElementById("three").innerHTML = `
-    <img src="../assets/img/third-character.png"/>
-    <h3>Name: ${lulu.name}</h3>
-    <br>
-    <h3>ATK: ${lulu.atk}</h3>
-    <img src="../assets/img/pjthree.png"/>
-    <br>
-    <button id="lulu">Select</button>
-    `;
 }
 
 

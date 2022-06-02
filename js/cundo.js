@@ -1,51 +1,51 @@
 // Classes
 class Character {
-    constructor(name, atk){
+    constructor(icon, name, atk, spray){
+        this.icon = icon;
         this.name = name;
         this.atk = atk;
+        this.spray = spray;
     }
 }
 
 class Enemy{
-    constructor(name,atk){
+    constructor(icon, name,atk){
+        this.icon = icon;
         this.name = name;
         this.atk = atk;
     }
 }
 
 
-let cundo = new Character("Cundo", 10);
+let cundo = new Character('../assets/img/first-character.png',"Cundo", 11, "../assets/img/pjone.png");
 
 
 document.getElementById("one").innerHTML = `
-<img src="../assets/img/first-character.png"/>
+<img src="${cundo.icon}"/>
 <h3>Name: ${cundo.name}</h3>
 <br>
 <h3>ATK: ${cundo.atk}</h3>
-<img src="../assets/img/pjone.png"/>
+<img src="${cundo.spray}"/>
 <br>
-<button id="cundo">Select</button>
 `;
 
 console.log(cundo);
 
-//Potions
-function potion(){
-        return new Item(1, "Potion");
-}
+let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
 
+document.getElementById('enemy-one').innerHTML = `
+    <img src="${zombie.icon}" class="zombie">
+    <h3>ATK: ${zombie.atk}</h3>
+    <button id="zombie" class="fight-one">Fight</button>
+`;
 
-
-function fightCundoSkull(){
-        let skull = new Enemy("Skull", 5, 5, 5);
-    
-        console.log(skull);
-    
+function fightCundoZombie(){
         
-        if(cundo.atk > skull.atk){
-            alert('You fight against Skull and won!');
-            console.log('You won and if this code works, you deserve ice cream');
-        } else if(cundo.atk = skull.atk){
+        console.log(zombie);
+        if(cundo.atk > zombie.atk){
+            alert(`You fight against Skull and won! \n`);
+            console.log(cundo);
+        } else if(cundo.atk = zombie.atk){
             alert('You fight against Skull and the result was a draw! \n No xp gained');
             console.log('If char.atk > skull.atk then its not working yet lol');
         } else {
@@ -57,8 +57,8 @@ function fightCundoSkull(){
 
 
 
-let buttonSkull = document.getElementById("skull");
-buttonSkull.addEventListener("click", fightCundoSkull);
+let buttonZombie = document.getElementById("zombie");
+buttonZombie.addEventListener("click", fightCundoZombie);
 
 
 let potionsArray = [];
@@ -85,22 +85,15 @@ buttonUsePotion.addEventListener("click", () => {
     
 });
 
-console.log(potionsArray);
 
 
+//Xp System?
 
-
-
-
-//Display
 /*
-function disp(){
-  var str='';
-  str = 'total number of elements in data array : ' + data.length + '<br>';
-  for (i=0;i<data.length;i++) 
-  { 
-  str += i + ':'+data[i] + " <a href=# onClick='remove_element("+data.indexOf(data[i])+")'> Remove</a> " + "<br >";  // adding each element with key number to variable
-  } 
-  
-  document.getElementById('disp').innerHTML=str; // Display the elements of the array
-  }*/
+if(cundo.xp = 100){
+    cundo.atk += 1;
+    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
+} else if (cundo.xp = 200) {
+    cundo.atk += 1;
+    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
+}*/

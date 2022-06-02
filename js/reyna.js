@@ -1,44 +1,52 @@
 // Classes
 class Character {
-    constructor(name, atk){
+    constructor(icon, name, atk, spray){
+        this.icon = icon;
         this.name = name;
         this.atk = atk;
+        this.spray = spray;
     }
 }
 
 class Enemy{
-    constructor(name,atk){
+    constructor(icon, name,atk){
+        this.icon = icon;
         this.name = name;
         this.atk = atk;
     }
 }
 
 //Reyna
-let reyna = new Character("Reyna", 10);
+let reyna = new Character('../assets/img/second-character.png',"Reyna", 10, '../assets/img/pjtwo.png');
 let reynaContainer = document.getElementById("two");
     
 reynaContainer.innerHTML = `
-    <img src="../assets/img/second-character.png"/>
+    <img src="${reyna.icon}"/>
     <h3>Name: ${reyna.name}</h3>
     <br>
     <h3>ATK: ${reyna.atk}</h3>
-    <img src="../assets/img/pjtwo.png"/>
+    <img src="${reyna.spray}"/>
     <br>
-    <button id="reyna">Select</button>
     `;
 console.log(reyna);
 
-function fightReynaSkull(){
-        let skull = new Enemy("Skull", 5, 5, 5);
-    
-        console.log(skull);
+let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
+
+document.getElementById('enemy-one').innerHTML = `
+    <img src="${zombie.icon}" class="zombie">
+    <h3>ATK: ${zombie.atk}</h3>
+    <button id="zombie" class="fight-one">Fight</button>
+`;
+
+function fightReynaZombie(){
+        console.log(zombie);
     
         
-        if(reyna.atk > skull.atk){
+        if(reyna.atk > zombie.atk){
             alert('You fight against Skull and won!');
             console.log('You won and if this code works, you deserve ice cream');
-        } else if(reyna.atk = skull.atk){
-            alert('You fight against Skull and the result was a draw! \n No xp gained');
+        } else if(reyna.atk = zombie.atk){
+            alert('You fight against Skull and the result was a draw!');
             console.log('If char.atk > skull.atk then its not working yet lol');
         } else {
              alert('You fight against Skull and lost!');
@@ -46,8 +54,8 @@ function fightReynaSkull(){
         }
     }
 
-let buttonSkull = document.getElementById("skull");
-buttonSkull.addEventListener("click", fightReynaSkull);
+let buttonZombie = document.getElementById("zombie");
+buttonZombie.addEventListener("click", fightReynaZombie);
 
 let potionsArray = [];
 let lastIndex = false;
