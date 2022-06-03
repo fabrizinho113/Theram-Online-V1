@@ -32,6 +32,7 @@ document.getElementById("three").innerHTML = `
 console.log(lulu);
 
 
+//Zombie
 let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
 
 document.getElementById('enemy-one').innerHTML = `
@@ -40,12 +41,11 @@ document.getElementById('enemy-one').innerHTML = `
     <button id="zombie" class="fight-one">Fight</button>
 `;
 
-
+//Zombie Fight
 function fightLuluZombie(){
     console.log(zombie);
      
     if(lulu.atk > zombie.atk){
-        alert('You fight against Skull and won!');
         console.log('You won and if this code works, you deserve ice cream');
     } else if(lulu.atk = zombie.atk){
         alert('You fight against Skull and the result was a draw! \n No xp gained');
@@ -56,9 +56,37 @@ function fightLuluZombie(){
         }
     }
 
-let buttonZombie = document.getElementById("zombie");
-buttonZombie.addEventListener("click", fightLuluZombie);
+//Popup
 
+document.getElementById('modal').innerHTML = `
+<img src="../assets/img/close.png" class="close" >
+<img src="${lulu.spray}" alt="Cundo" class="cundo-character">
+<img src="../assets/img/zombie-character.png" alt="Zombie">
+`;
+
+function popup(){
+    document.querySelector('.bg-modal').style.display = "flex";
+}
+
+
+
+//Close Popup
+function close(){
+    let close = document.querySelector('.close');
+    close.addEventListener("click", () => {
+    document.querySelector('.bg-modal').style.display = "none";
+    });
+}
+
+let buttonZombie = document.getElementById("zombie");
+buttonZombie.addEventListener("click", ()=>{
+    fightLuluZombie();
+    popup();
+    close();
+});
+
+
+//Potions
 let potionsArray = [];
 let lastIndex = false;
 

@@ -17,20 +17,22 @@ class Enemy{
 }
 
 
+//Cundo
 let cundo = new Character('../assets/img/first-character.png',"Cundo", 11, "../assets/img/pjone.png");
 
 
 document.getElementById("one").innerHTML = `
-<img src="${cundo.icon}"/>
+<img src="${cundo.icon}" class="cundo-icon"/>
 <h3>Name: ${cundo.name}</h3>
 <br>
 <h3>ATK: ${cundo.atk}</h3>
-<img src="${cundo.spray}"/>
+<img src="${cundo.spray}" class="cundo-character"/>
 <br>
 `;
 
 console.log(cundo);
 
+//Zombie
 let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
 
 document.getElementById('enemy-one').innerHTML = `
@@ -39,11 +41,12 @@ document.getElementById('enemy-one').innerHTML = `
     <button id="zombie" class="fight-one">Fight</button>
 `;
 
+
+//Fight Zombie
 function fightCundoZombie(){
         
         console.log(zombie);
         if(cundo.atk > zombie.atk){
-            alert(`You fight against Skull and won! \n`);
             console.log(cundo);
         } else if(cundo.atk = zombie.atk){
             alert('You fight against Skull and the result was a draw! \n No xp gained');
@@ -54,13 +57,40 @@ function fightCundoZombie(){
         }
 }
 
+//Popup
+
+document.getElementById('modal').innerHTML = `
+<img src="../assets/img/close.png" class="close" >
+<img src="${cundo.spray}" alt="Cundo" class="cundo-character">
+<img src="../assets/img/zombie-character.png" alt="Zombie">
+`;
+
+function popup(){
+    document.querySelector('.bg-modal').style.display = "flex";
+}
 
 
 
+//Close Popup
+function close(){
+    let close = document.querySelector('.close');
+    close.addEventListener("click", () => {
+    document.querySelector('.bg-modal').style.display = "none";
+    });
+}
+
+
+//Zombie Button
 let buttonZombie = document.getElementById("zombie");
-buttonZombie.addEventListener("click", fightCundoZombie);
+buttonZombie.addEventListener("click", () => {
+    fightCundoZombie();
+    popup();
+    close();
+});
 
 
+
+//Potions
 let potionsArray = [];
 let lastIndex = false;
 
