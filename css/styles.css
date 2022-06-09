@@ -245,10 +245,6 @@ header .logo {
     border: #000;
 }
 
-.cundo-character{
-    transform: scaleX(-1);
-}
-
 .map {
     padding: 30rem 0;
     width: 100%;
@@ -282,7 +278,7 @@ header .logo {
 }
 
 
-/* Modal */
+/*----------------------------------- Modal  --------------------------------------------------------*/
 
 .bg-modal{
     background: rgba(0, 0, 0, 0.6);
@@ -298,8 +294,8 @@ header .logo {
 
 .modal-popup{
     height: 400px;
-    width: 500px;
-    background: #fff;
+    width: 800px;
+    background: url('../assets/img/background-forest.png');
     padding: 20px;
     border-radius: 8px;
     position: relative;
@@ -317,6 +313,31 @@ header .logo {
     cursor: pointer;
 }
 
+.cundo-character{
+    transform: scaleX(-1);
+    position: absolute;
+    bottom: 110px;
+    left: 80px;
+}
+
+
+.zombie-character{
+    position: absolute;
+    bottom: 80px;
+    right: 80px;
+}
+
+.actions{
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    position: absolute;
+    gap: 8px;
+    bottom: 20px;
+    left: 52px;
+}
+
+/*-------------------------------------------------------------------------------------------*/
 
 
 
