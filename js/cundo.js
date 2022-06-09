@@ -1,36 +1,38 @@
-// Classes
-class Character {
-    constructor(icon, name, atk, spray){
-        this.icon = icon;
-        this.name = name;
-        this.atk = atk;
-        this.spray = spray;
-    }
-}
-
-class Enemy{
-    constructor(icon, name,atk){
-        this.icon = icon;
-        this.name = name;
-        this.atk = atk;
-    }
-}
+import {Character, Enemy} from "./classes.js";
 
 
 //Cundo
-let cundo = new Character('../assets/img/first-character.png',"Cundo", 11, "../assets/img/pjone.png");
+let cundo = new Character('../assets/img/first-character.png',"Cundo", 11, 1, 0,  "../assets/img/pjone.png");
 
 
 document.getElementById("one").innerHTML = `
 <img src="${cundo.icon}" class="cundo-icon"/>
 <h3>Name: ${cundo.name}</h3>
-<br>
-<h3>ATK: ${cundo.atk}</h3>
-<img src="${cundo.spray}" class="cundo-character"/>
+<h3><img src="../assets/img/cundo-level.png"/>${cundo.level}</h3>
+<h3><img src="../assets/img/cundo-atk-icon.png"/>${cundo.atk}</h3>
+<h3>XP: ${cundo.xp}</h3>
 <br>
 `;
 
 console.log(cundo);
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+//Music 
+let battleMusic = new Audio("../assets/music/FF7-battle-theme-8bits.mp3");
+battleMusic.volume = 0.1;
+
+function musicPlay() {
+    battleMusic.play();
+}
+
+function musicStop() {
+    battleMusic.pause();
+    battleMusic.currentTime = 0;
+}
+
 
 //Zombie
 let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
@@ -44,25 +46,40 @@ document.getElementById('enemy-one').innerHTML = `
 
 //Fight Zombie
 function fightCundoZombie(){
-        
+
         console.log(zombie);
-        if(cundo.atk > zombie.atk){
-            console.log(cundo);
-        } else if(cundo.atk = zombie.atk){
-            alert('You fight against Skull and the result was a draw! \n No xp gained');
-            console.log('If char.atk > skull.atk then its not working yet lol');
-        } else {
-             alert('You fight against Skull and lost!');
-             console.log('XD');
-        }
+
+        let result = cundo.atk > zombie.atk ? cundo.xp += 25 : cundo.xp += 0; 
+        result ? console.log('You won!') : console.log('You lost!');
+        xpSystem(result);
 }
+
+//Zombie Button
+let buttonZombie = document.getElementById("zombie");
+buttonZombie.addEventListener("click", () => {
+    musicPlay();
+    fightCundoZombie();
+    popup();
+    close();
+});
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
 
 //Popup
 
 document.getElementById('modal').innerHTML = `
 <img src="../assets/img/close.png" class="close" >
 <img src="${cundo.spray}" alt="Cundo" class="cundo-character">
-<img src="../assets/img/zombie-character.png" alt="Zombie">
+<img src="../assets/img/zombie-character.png" alt="Zombie" class="zombie-character">
+<div class="actions">
+    <button>Hit</button>
+    <button>Magic</button>
+    <button>Special</button>
+    <button>Run</button>
+</div>
 `;
 
 function popup(){
@@ -75,24 +92,20 @@ function popup(){
 function close(){
     let close = document.querySelector('.close');
     close.addEventListener("click", () => {
+    musicStop();
     document.querySelector('.bg-modal').style.display = "none";
     });
 }
 
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
-//Zombie Button
-let buttonZombie = document.getElementById("zombie");
-buttonZombie.addEventListener("click", () => {
-    fightCundoZombie();
-    popup();
-    close();
-});
 
 
 
 //Potions
-let potionsArray = [];
-let lastIndex = false;
+/*let potionsArray = [];
 
 let buttonPotion = document.getElementById("potion");
 buttonPotion.addEventListener("click", () => {
@@ -113,20 +126,92 @@ buttonUsePotion.addEventListener("click", () => {
         console.log(potionsArray);
     }
     
-});
+});*/
 
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
+//Xp System
 
-//Xp System?
+//Levels
+let levelOne = 0;
+let levelTwo = 100;
+let levelThree = 300;
+let levelFour = 500;
+let levelFive = 800;
 
-/*
-if(cundo.xp = 100){
-    cundo.atk += 1;
-    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
-} else if (cundo.xp = 200) {
-    cundo.atk += 1;
-    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
+function xpSystem(){
 
-let level;
-let levelTwo;
-}*/
+    //Levels
+    if(cundo.xp >= levelOne && cundo.xp < levelTwo){
+        cundo.level = 1;
+    }
+    if(cundo.xp >= levelTwo && cundo.xp < levelThree){
+        cundo.level = 2;
+    }
+    if(cundo.xp >= levelThree && cundo.xp < levelFour){
+        cundo.level = 3;
+    }
+    if(cundo.xp >= levelFour && cundo.xp < levelFive){
+        cundo.level = 4;
+    }
+    if(cundo.xp >= levelFive){
+        cundo.level = 5;
+    }
+
+    //Stats
+    if(cundo.level == 2){
+        cundo.atk = 13;
+    }
+    if(cundo.level == 3){
+        cundo.atk = 14;
+    }
+    if(cundo.level == 4){
+        cundo.atk = 16;
+    }
+    if(cundo.level == 5){
+        cundo.atk = 18;
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+//Refresh stats on DOM
+
+setInterval(() => {
+   
+    document.getElementById("one").innerHTML = `
+<img src="${cundo.icon}" class="cundo-icon"/>
+<h3>Name: ${cundo.name}</h3>
+<h3><img src="../assets/img/cundo-level.png"/>${cundo.level}</h3>
+<h3><img src="../assets/img/cundo-atk-icon.png"/>${cundo.atk}</h3>
+<h3>XP: ${cundo.xp}</h3>
+<br>
+
+`;
+ }, 1000)
+
+ // ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+//Save / Load progress
+
+//Save
+function saveGame(){
+    localStorage.setItem("char", JSON.stringify(cundo));
+}
+
+//Load
+function loadGame(){
+    cundo = JSON.parse(localStorage.getItem("char"));
+}
+
+let save = document.getElementById('save');
+save.addEventListener("click", saveGame);
+
+let load = document.getElementById('load');
+load.addEventListener("click", loadGame);

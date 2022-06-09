@@ -7,6 +7,7 @@
     <title>Theram Online V1 - Character Creation</title>
     <!--CSS-->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -20,8 +21,8 @@
                     </li>
                     <li>
                         <div id="one" class="character"></div>
-                        <button id="potion">Obtain Potion</button>
-                        <button id="potion-use">Use Potion</button>
+                        <button id="save" class="save">Save</button>
+                        <button id="load" class="load">Load</button>
                     </li>
                 </ul>
             </div>
@@ -34,11 +35,12 @@
     </section>
 
     <div class="bg-modal">
+        <audio id="battleMusic" loop="true"></audio>
         <div id="modal" class="modal-popup">
         </div>
     </div>
 
     <!--Scripts-->
-    <script src="../js/cundo.js"></script>
+    <script type="module" src="../js/cundo.js"></script>
 </body>
 </html>

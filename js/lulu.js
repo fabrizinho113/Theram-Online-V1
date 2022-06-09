@@ -1,36 +1,24 @@
-// Classes
-class Character {
-    constructor(icon, name, atk, spray){
-        this.icon = icon;
-        this.name = name;
-        this.atk = atk;
-        this.spray = spray;
-    }
-}
-
-class Enemy{
-    constructor(icon, name,atk){
-        this.icon = icon;
-        this.name = name;
-        this.atk = atk;
-    }
-}
+import {Character, Enemy} from "./classes.js";
 
 
   //Lulu
-let lulu = new Character('../assets/img/third-character.png',"Lulu", 14, '../assets/img/pjthree.png');
+let lulu = new Character('../assets/img/third-character.png',"Lulu", 14, 1, 0, '../assets/img/pjthree.png');
         
 document.getElementById("three").innerHTML = `
-    <img src="${lulu.icon}"/>
-    <h3>Name: ${lulu.name}</h3>
-    <br>
-    <h3>ATK: ${lulu.atk}</h3>
-    <img src="${lulu.spray}"/>
-    <br>
-    `;
+<img src="${lulu.icon}" class="cundo-icon"/>
+<h3>Name: ${lulu.name}</h3>
+<h3><img src="../assets/img/lulu-level.png"/>${lulu.level}</h3>
+<h3><img src="../assets/img/lulu-atk-icon.png"/>${lulu.atk}</h3>
+<h3>XP: ${lulu.xp}</h3>
+<br>
+`;
 
 console.log(lulu);
 
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
 //Zombie
 let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
@@ -45,16 +33,22 @@ document.getElementById('enemy-one').innerHTML = `
 function fightLuluZombie(){
     console.log(zombie);
      
-    if(lulu.atk > zombie.atk){
-        console.log('You won and if this code works, you deserve ice cream');
-    } else if(lulu.atk = zombie.atk){
-        alert('You fight against Skull and the result was a draw! \n No xp gained');
-        console.log('If char.atk > skull.atk then its not working yet lol');
-    } else {
-         alert('You fight against Skull and lost!');
-         console.log('XD');
-        }
-    }
+    let resultado = lulu.atk > zombie.atk ? lulu.xp += 25 : lulu.xp += 0; 
+        resultado ? console.log('You won!') : console.log('You lost!');
+        xpSystem(resultado);
+}
+
+
+let buttonZombie = document.getElementById("zombie");
+buttonZombie.addEventListener("click", ()=>{
+    fightLuluZombie();
+    popup();
+    close();
+});
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
 //Popup
 
@@ -78,51 +72,93 @@ function close(){
     });
 }
 
-let buttonZombie = document.getElementById("zombie");
-buttonZombie.addEventListener("click", ()=>{
-    fightLuluZombie();
-    popup();
-    close();
-});
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
 
-//Potions
-let potionsArray = [];
-let lastIndex = false;
-
-let buttonPotion = document.getElementById("potion");
-buttonPotion.addEventListener("click", () => {
-        potionsArray.push("Potion");
-        alert('You obtained a potion!');
-        console.log(potionsArray);
-    
-});
-
-
-let buttonUsePotion = document.getElementById("potion-use");
-buttonUsePotion.addEventListener("click", () => {
-    if(potionsArray.length < 1 || potionsArray == undefined){
-        alert(`You don't have any more potion left to use!`);
-    } else {
-        alert('You used a potion!');
-        potionsArray.pop();
-        console.log(potionsArray);
-    }
-    
-});
-
-console.log(potionsArray);
 
 //Xp System?
+//Xp System
 
-/*
-if(cundo.xp = 100){
-    cundo.atk += 1;
-    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
-} else if (cundo.xp = 200) {
-    cundo.atk += 1;
-    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
+//Levels
+let levelOne = 0;
+let levelTwo = 100;
+let levelThree = 300;
+let levelFour = 500;
+let levelFive = 800;
 
-let level;
-let levelTwo;
-}*/
+function xpSystem(){
+
+    //Levels
+    if(lulu.xp >= levelOne && lulu.xp < levelTwo){
+        lulu.level = 1;
+    }
+    if(lulu.xp >= levelTwo && lulu.xp < levelThree){
+        lulu.level = 2;
+    }
+    if(lulu.xp >= levelThree && lulu.xp < levelFour){
+       lulu.level = 3;
+    }
+    if(lulu.xp >= levelFour && lulu.xp < levelFive){
+        lulu.level = 4;
+    }
+    if(lulu.xp >= levelFive){
+        lulu.level = 5;
+    }
+
+    //Stats
+    if(lulu.level == 2){
+        lulu.atk = 16;
+    }
+    if(lulu.level == 3){
+        lulu.atk = 17;
+    }
+    if(lulu.level == 4){
+        lulu.atk = 19;
+    }
+    if(lulu.level == 5){
+        lulu.atk = 20;
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+//Refresh stats on DOM
+
+setInterval(() => {
+   
+    document.getElementById("three").innerHTML = `
+    <img src="${lulu.icon}" class="cundo-icon"/>
+    <h3>Name: ${lulu.name}</h3>
+    <h3><img src="../assets/img/lulu-level.png"/>${lulu.level}</h3>
+    <h3><img src="../assets/img/lulu-atk-icon.png"/>${lulu.atk}</h3>
+    <h3>XP: ${lulu.xp}</h3>
+    <br>
+`;
+ }, 1000)
+
+ // ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+//Save / Load progress
+
+//Save
+function saveGame(){
+    localStorage.setItem("char", JSON.stringify(cundo));
+}
+
+//Load
+function loadGame(){
+    cundo = JSON.parse(localStorage.getItem("char"));
+}
+
+let save = document.getElementById('save');
+save.addEventListener("click", saveGame);
+
+let load = document.getElementById('load');
+load.addEventListener("click", loadGame);

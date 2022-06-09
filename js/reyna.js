@@ -1,34 +1,20 @@
-// Classes
-class Character {
-    constructor(icon, name, atk, spray){
-        this.icon = icon;
-        this.name = name;
-        this.atk = atk;
-        this.spray = spray;
-    }
-}
-
-class Enemy{
-    constructor(icon, name,atk){
-        this.icon = icon;
-        this.name = name;
-        this.atk = atk;
-    }
-}
+import {Character, Enemy} from "./classes.js";
 
 //Reyna
-let reyna = new Character('../assets/img/second-character.png',"Reyna", 10, '../assets/img/pjtwo.png');
-let reynaContainer = document.getElementById("two");
+let reyna = new Character('../assets/img/second-character.png',"Reyna", 10, 1, 0 ,'../assets/img/pjtwo.png');
     
-reynaContainer.innerHTML = `
-    <img src="${reyna.icon}"/>
-    <h3>Name: ${reyna.name}</h3>
-    <br>
-    <h3>ATK: ${reyna.atk}</h3>
-    <img src="${reyna.spray}"/>
-    <br>
-    `;
-console.log(reyna);
+document.getElementById("two").innerHTML = `
+<img src="${reyna.icon}" class="cundo-icon"/>
+<h3>Name: ${reyna.name}</h3>
+<h3><img src="../assets/img/reyna-level.png"/>${reyna.level}</h3>
+<h3><img src="../assets/img/reyna-atk-icon.png"/>${reyna.atk}</h3>
+<h3>XP: ${reyna.xp}</h3>
+<br>
+`;
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
 //Zombie
 let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
@@ -43,17 +29,20 @@ document.getElementById('enemy-one').innerHTML = `
 function fightReynaZombie(){
         console.log(zombie);
     
-        
-        if(reyna.atk > zombie.atk){
-            console.log('You won and if this code works, you deserve ice cream');
-        } else if(reyna.atk = zombie.atk){
-            alert('You fight against Skull and the result was a draw!');
-            console.log('If char.atk > skull.atk then its not working yet lol');
-        } else {
-             alert('You fight against Skull and lost!');
-             console.log('XD');
-        }
+        let resultado = reyna.atk > zombie.atk ? reyna.xp += 25 : reyna.xp += 0; 
+        resultado ? console.log('You won!') : console.log('You lost!');
+        xpSystem(resultado);
     }
+
+let buttonZombie = document.getElementById("zombie");
+buttonZombie.addEventListener("click", () => {
+    fightReynaZombie();
+    popup();
+    close();
+});
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
 //Popup
 
@@ -76,50 +65,101 @@ function close(){
     });
 }
 
-let buttonZombie = document.getElementById("zombie");
-buttonZombie.addEventListener("click", () => {
-    fightReynaZombie();
-    popup();
-    close();
-});
-
-//Potions
-let potionsArray = [];
-let lastIndex = false;
-
-let buttonPotion = document.getElementById("potion");
-buttonPotion.addEventListener("click", () => {
-        potionsArray.push("Potion");
-        alert('You obtained a potion!');
-        console.log(potionsArray);
-    
-});
-
-
-let buttonUsePotion = document.getElementById("potion-use");
-buttonUsePotion.addEventListener("click", () => {
-    if(potionsArray.length < 1 || potionsArray == undefined){
-        alert(`You don't have any more potion left to use!`);
-    } else {
-        alert('You used a potion!');
-        potionsArray.pop();
-        console.log(potionsArray);
-    }
-    
-});
-
-console.log(potionsArray);
-
-//Xp System?
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
 /*
-if(cundo.xp = 100){
-    cundo.atk += 1;
-    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
-} else if (cundo.xp = 200) {
-    cundo.atk += 1;
-    alert('Congratulations, you leveled up! \n HP: +1 \n ATK: + 1');
+Posible sistema de items?
 
-let level;
-let levelTwo;
-}*/
+*/
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+
+
+//Xp System
+
+//Levels
+let levelOne = 0;
+let levelTwo = 100;
+let levelThree = 300;
+let levelFour = 500;
+let levelFive = 800;
+
+function xpSystem(){
+
+    //Levels
+    if(reyna.xp >= levelOne && reyna.xp < levelTwo){
+        reyna.level = 1;
+    }
+    if(reyna.xp >= levelTwo && reyna.xp < levelThree){
+        reyna.level = 2;
+    }
+    if(reyna.xp >= levelThree && reyna.xp < levelFour){
+        reyna.level = 3;
+    }
+    if(reyna.xp >= levelFour && reyna.xp < levelFive){
+        reyna.level = 4;
+    }
+    if(reyna.xp >= levelFive){
+        reyna.level = 5;
+    }
+
+    //Stats
+    if(reyna.level == 2){
+        reyna.atk = 12;
+    }
+    if(reyna.level == 3){
+        reyna.atk = 15;
+    }
+    if(reyna.level == 4){
+        reyna.atk = 16;
+    }
+    if(reyna.level == 5){
+        reyna.atk = 19;
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+//Refresh stats on DOM
+
+setInterval(() => {
+   
+    document.getElementById("two").innerHTML = `
+    <img src="${reyna.icon}" class="cundo-icon"/>
+    <h3>Name: ${reyna.name}</h3>
+    <h3><img src="../assets/img/reyna-level.png"/>${reyna.level}</h3>
+    <h3><img src="../assets/img/reyna-atk-icon.png"/>${reyna.atk}</h3>
+    <h3>XP: ${reyna.xp}</h3>
+    <br>
+    `;
+ }, 1000)
+
+ // ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+//Save / Load progress
+
+//Save
+function saveGame(){
+    localStorage.setItem("char", JSON.stringify(cundo));
+}
+
+//Load
+function loadGame(){
+    cundo = JSON.parse(localStorage.getItem("char"));
+}
+
+let save = document.getElementById('save');
+save.addEventListener("click", saveGame);
+
+let load = document.getElementById('load');
+load.addEventListener("click", loadGame);
+
