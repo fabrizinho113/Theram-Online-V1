@@ -1,4 +1,4 @@
-import {Character} from "./classes.js";
+import {Character} from "./classesAndEnemies.js";
 
 
 //Audio
@@ -63,6 +63,7 @@ console.log(lulu);
 function characterOne(){
 
     window.location.href = "../pages/character-cundo.html";
+    
 }
 
 function characterTwo(){
@@ -84,3 +85,7 @@ buttonReyna.addEventListener("click", characterTwo);
 
 let buttonLulu = document.getElementById("lulu");
 buttonLulu.addEventListener("click", characterThree);
+
+
+
+

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theram Online V1 - Character Creation</title>
     <!--CSS-->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -22,6 +21,7 @@
                         <div id="three" class="character"></div>
                         <button id="save" class="save">Save</button>
                         <button id="load" class="load">Load</button>
+                        <button id="shop" class="shop">Shop</button>
                     </li>
                 </ul>
             </div>
@@ -31,14 +31,34 @@
     <section class="map">
         <div id="enemy-one" class="enemy-container">
         </div>
+
+        <div id="enemy-two" class="enemy-container">
+        </div>
+
+        <div id="enemy-three" class="enemy-container">
+        </div>
+
+        <div id="enemy-four" class="enemy-container">
+        </div>
     </section>
 
-    <div class="bg-modal">
-        <div id="modal" class="modal-popup">
+    <div class="bg-modal-zombie">
+        <div id="modal-zombie" class="modal-popup">
+        </div>
+    </div>
+
+    <div class="bg-modal-darkKnight">
+        <div id="modal-dark-knight" class="modal-popup-two">
+        </div>
+    </div>
+
+    <div class="bg-shop">
+        <div id="modal-shop" class="modal-shop">
         </div>
     </div>
 
     <!--Scripts-->
+    <script src="../js/sweetalert2.all.min.js"></script>
     <script type="module" src="../js/lulu.js"></script>
 </body>
 </html>
