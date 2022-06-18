@@ -236,6 +236,45 @@ header .logo {
     transition: 0.3s;
 }
 
+.btn,
+.btn-two{
+    position: relative;
+    width: 180px;
+    height: 60px;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 60px;
+    letter-spacing: 2px;
+    margin: 20px;
+    transition: 0.5s;
+}
+
+.btn:hover{
+    background: #ec0b36 url(../assets/img/pixel.png);
+    transition-delay: 0.8s;
+    background-size: 180px;
+    animation: animate 0.8s steps(8) forwards;
+}
+
+.btn-two:hover{
+    background: rgb(173, 53, 173) url(../assets/img/pixel2.png);
+    transition-delay: 0.8s;
+    background-size: 180px;
+    animation: animate 0.8s steps(8) forwards;
+}
+
+@keyframes animate{
+
+    0%{
+        background-position-y: 0;
+    }
+    100%{
+        background-position-y: -480px;
+    }
+}
+
 /* ------------------------------------------------------------------------------------------ */
 /* -----------------------------Character-.html---------------------------------------------- */
 /* ------------------------------------------------------------------------------------------ */
