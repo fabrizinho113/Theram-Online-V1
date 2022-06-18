@@ -287,7 +287,7 @@ function saveGameLulu(){
     swalSaveCustomStyle.fire({
         title: 'Do you want to save your progress?',
         showDenyButton: true,
-        showCancelButton: true,
+        showCancelButton: false,
         confirmButtonText: 'Save',
         denyButtonText: `Don't save`,
       }).then((result) => {

@@ -285,7 +285,10 @@ document.getElementById("one").innerHTML = `
 //Save
 const swalSaveCustomStyle = Swal.mixin({
     customClass: {
-        title: 'sweetFont',
+        title: 'sweetFont', 
+        confirmButton: 'sweetFont',
+        denyButton: 'sweetFont',
+        cancelButton: 'sweetFont'
     },
     buttonsStyling: true
 })
@@ -294,11 +297,11 @@ function saveGameCundo(){
     swalSaveCustomStyle.fire({
         title: 'Do you want to save your progress?',
         showDenyButton: true,
-        showCancelButton: true,
+        showCancelButton: false,
         confirmButtonText: 'Save',
         denyButtonText: `Don't save`,
       }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
+        /* isConfirmed - isDenied */
         if (result.isConfirmed) {
         localStorage.setItem("char", JSON.stringify(cundo));
         swalSaveCustomStyle.fire('Saved!', '', 'success');
@@ -319,7 +322,8 @@ function loadGameCundo(){
         icon: 'success',
         title: 'Your character loaded correctly!',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        timerProgressBar: true
       })
 }
 

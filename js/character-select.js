@@ -22,7 +22,7 @@ document.getElementById("one").innerHTML = `
 <h3>ATK: ${cundo.atk}</h3>
 <img src="${cundo.spray}"/>
 <br>
-<button id="cundo">Select</button>
+<button id="cundo" class="btn">Select</button>
 `;
 console.log(cundo);
 
@@ -36,7 +36,7 @@ document.getElementById("two").innerHTML = `
     <h3>ATK: ${reyna.atk}</h3>
     <img src="${reyna.spray}"/>
     <br>
-    <button id="reyna">Select</button>
+    <button id="reyna" class="btn-two">Select</button>
     `;
 
 console.log(reyna);
@@ -52,30 +52,78 @@ document.getElementById("three").innerHTML = `
     <h3>ATK: ${lulu.atk}</h3>
     <img src="${lulu.spray}"/>
     <br>
-    <button id="lulu"">Select</button>
+    <button id="lulu" class="btn-two">Select</button>
     `;
 
 console.log(lulu);
 
+const swalSaveCustomStyle = Swal.mixin({
+    customClass: {
+        title: 'sweetFont', 
+        confirmButton: 'sweetFont',
+        denyButton: 'sweetFont',
+        cancelButton: 'sweetFont'
+    },
+    buttonsStyling: true
+})
 
-//Functions
 
+//Select Cundo
 function characterOne(){
-
-    window.location.href = "../pages/character-cundo.html";
-    
+    swalSaveCustomStyle.fire({
+        title: 'Do you want to proceed with Cundo?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
+        /* isConfirmed - isDenied */
+        if (result.isConfirmed) {
+            window.location.href = "../pages/character-cundo.html";
+        } else if (result.isDenied) {
+            //Nothing
+        }
+      }) 
 }
 
+//Select Reyna
 function characterTwo(){
-
-    window.location.href = "../pages/character-reyna.html";
+    swalSaveCustomStyle.fire({
+        title: 'Do you want to proceed with Reyna?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
+        /* isConfirmed - isDenied */
+        if (result.isConfirmed) {
+            window.location.href = "../pages/character-reyna.html";
+        } else if (result.isDenied) {
+            //Nothing
+        }
+      }) 
 }
 
+//Select Lulu
 function characterThree(){
-
-    window.location.href = "../pages/character-lulu.html";
+    swalSaveCustomStyle.fire({
+        title: 'Do you want to proceed with Lulu?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
+        /* isConfirmed - isDenied */
+        if (result.isConfirmed) {
+            window.location.href = "../pages/character-lulu.html";
+        } else if (result.isDenied) {
+            //Nothing
+        }
+      })
 }
 
+
+//Events
 
 let buttonCundo = document.getElementById("cundo");
 buttonCundo.addEventListener("click", characterOne);
