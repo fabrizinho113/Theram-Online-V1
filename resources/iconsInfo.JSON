@@ -1,0 +1,7 @@
+{
+    "gold" : "You can spend gold in the shop to buy items and increase your damage!",
+    "attack" : "The power of this character. If your power is less or equal to the monster attack points then you will lose!",
+    "level" : "The level of the character",
+    "shop" : "Spend your gold here!"
+
+}

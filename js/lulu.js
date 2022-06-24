@@ -1,39 +1,58 @@
 import {Character, darkKnight, darkLord, skullKing, zombie} from "./classesAndEnemies.js";
 
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+// -----------------------------------  Character Setup --------------------------------------------------------- //
+
+//Gold
 let gold = 10;
 
-  //Lulu
+//Lulu
 let lulu = new Character('../assets/img/third-character.png',"Lulu", 14, 1, 0, '../assets/img/pjthree.png');
 
-        
+//Display DOM
 document.getElementById("three").innerHTML = `
 <img src="${lulu.icon}" class="cundo-icon"/>
 <br>
-<h3><img src="../assets/img/cundo-level.png"/ class="icon-level">${lulu.level}</h3>
-<h3><img src="../assets/img/cundo-atk-icon.png"/ class="icon-atk">${lulu.atk}</h3>
+<h3><img src="../assets/img/lulu-level.png"/ class="icon-level">${lulu.level}</h3>
+<h3><img src="../assets/img/lulu-atk-icon.png"/ class="icon-atk">${lulu.atk}</h3>
 <h3><img src="../assets/img/exp-icon.png"/ class="icon-xp">${lulu.xp}</h3>
 <h3><img src="../assets/img/gold-icon.png"/ class="icon-gold"> ${gold}</h3>
 <br>
 `;
 
-console.log(lulu);
-
-
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
 
-//Battle Music 
-let battleMusic = new Audio("../assets/music/FF7-battle-theme-8bits.mp3");
-battleMusic.volume = 0.1;
+// -----------------------------------  Battle Music --------------------------------------------------------- //
 
-function musicFightPlay() {
-    battleMusic.play();
+//Victory
+let victoryMusic = new Audio("../assets/music/Victory-8bit.mp3");
+victoryMusic.volume = 0.1;
+
+function musicVictoryPlay() {
+    victoryMusic.play();
 }
 
-function musicFightStop() {
-    battleMusic.pause();
-    battleMusic.currentTime = 0;
+function musicVictoryStop() {
+    victoryMusic.pause();
+    victoryMusic.currentTime = 0;
+}
+
+//Defeat
+let defeatMusic = new Audio('../assets/music/Defeat-theme.mp3');
+defeatMusic.volume = 0.1
+
+function musicDefeatPlay() {
+    defeatMusic.play();
+}
+
+function musicDefeatStop() {
+    defeatMusic.pause();
+    defeatMusic.currentTime = 0;
 }
 
 //Shop Music 
@@ -53,6 +72,8 @@ function musicShopStop() {
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
+
+// -----------------------------------  Display enemies DOM --------------------------------------------------------- //
 
 //Zombie
 
@@ -85,50 +106,49 @@ document.getElementById('enemy-four').innerHTML = `
     <h3>ATK: ${skullKing.atk}</h3>
     <button id="skullKing" class="fight-four">Fight</button>
 `;
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
 
-//Zombie Fight
+// -----------------------------------  Fight functions --------------------------------------------------------- //
+
+let result;
+
+//Fight Zombie
 function fightLuluZombie(){
-        console.log(zombie);
+    result = lulu.atk > zombie.atk ? zombieWin() : zombieLose();
+    xpSystem(result);
     
-        let resultado = lulu.atk > zombie.atk ? lulu.xp += 25 : lulu.xp += 0; 
-        resultado ? gold += 10 : gold += 0;
-        xpSystem(resultado);
-    }
+}
 
 //Fight Dark Knight
 function fightLuluDarkKnight(){
-
-    console.log(darkKnight);
-
-    let result = lulu.atk > darkKnight.atk ? (lulu.xp += 25 && (gold += 20)) : (lulu.xp += 0 && (gold += 0)); 
-    xpSystem(result);
+    result = lulu.atk > darkKnight.atk ? darkKnightWin() : darkKnightLose();
+    xpSystem(result); 
 }
 
 //Fight Dark Lord
 function fightLuluDarkLord(){
-
-    console.log(darkLord);
-
-    let result = lulu.atk > darkLord.atk ? (lulu.xp += 35 && (gold += 30)) : (lulu.xp += 0 && (gold += 0));
+    result = lulu.atk > darkLord.atk ? darkLordWin() : darkLordLose();
     xpSystem(result);
 }
 
 //Fight Skull King
-/*
-function fightReynaSkullKing(){
 
-    console.log(skullKing);
-
-    let result = lulu.atk > skullKing.atk ? lulu.xp += 50 : cundo.xp += 0; 
-    result ? gold += 40 : gold += 0;
+function fightLuluSkullKing(){
+    result = lulu.atk > skullKing.atk ? skullKingWin() : skullKingLose();
     xpSystem(result);
-}*/
+}
 
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+// -----------------------------------  Buttons from enemies (events) --------------------------------------------------------- //
 
 //Zombie Button
 let buttonZombie = document.getElementById("zombie");
 buttonZombie.addEventListener("click", () => {
-    musicFightPlay();
     fightLuluZombie();
     popupFightZombie();
     closePopupZombie();
@@ -137,7 +157,6 @@ buttonZombie.addEventListener("click", () => {
 //Dark Knight Button
 let buttonDarkKnight = document.getElementById("darkKnight");
 buttonDarkKnight.addEventListener("click", () => {
-    musicFightPlay();
     fightLuluDarkKnight();
     popupFightDarkKnight();
     closePopupDarkKnight();
@@ -146,15 +165,24 @@ buttonDarkKnight.addEventListener("click", () => {
 //Dark Lord Button
 let buttonDarkLord = document.getElementById("darkLord");
 buttonDarkLord.addEventListener("click", () => {
-    musicFightPlay();
     fightLuluDarkLord();
-    popupFightDarkKnight();
-    closePopupDarkKnight();
+    popupFightDarkLord();
+    closePopupDarkLord();
+});
+
+//Skull King Button
+let buttonSkullKing = document.getElementById("skullKing");
+buttonSkullKing.addEventListener("click", () => {
+    fightLuluSkullKing();
+    popupFightSkullKing();
+    closePopupSkullKing();
 });
 
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
+
+// -----------------------------------  Popups/Modals (currently static) --------------------------------------------------------- //
 
 //Popups
 
@@ -172,42 +200,82 @@ document.getElementById('modal-dark-knight').innerHTML = `
 <img src="../assets/img/dark-knight-character.png" alt="DarkKnight" class="dark-knight-character">
 `;
 
-/*
+
 //Dark Lord
 document.getElementById('modal-dark-lord').innerHTML = `
-<img src="../assets/img/close.png" class="close-two" >
-<img src="${cundo.spray}" id="character-one" alt="Cundo" class="cundo-character">
+<img src="../assets/img/close.png" class="close-three" >
+<img src="${lulu.spray}" id="character-one" alt="Cundo" class="cundo-character">
 <img src="../assets/img/dark-lord-character.png" alt="DarkLord" class="dark-lord-character">
-`;*/
+`;
 
+//Skull King
+document.getElementById('modal-skull-king').innerHTML = `
+<img src="../assets/img/close.png" class="close-four" >
+<img src="${lulu.spray}" id="character-one" alt="Cundo" class="cundo-character">
+<img src="../assets/img/skull-king-character.png" alt="skullKing" class="skull-king-character">
+`;
 
+// -----------------------------------  Popups/Modals Functions --------------------------------------------------------- //
 
-function popupFightZombie(){
+async function popupFightZombie(){
+    await delay(speed);
     document.querySelector('.bg-modal-zombie').style.display = "flex";
 }
 
-function popupFightDarkKnight(){
+async function popupFightDarkKnight(){
+    await delay(speed);
     document.querySelector('.bg-modal-darkKnight').style.display = "flex";
 }
 
+async function popupFightDarkLord(){
+    await delay(speed);
+    document.querySelector('.bg-modal-darkLord').style.display = "flex";
+}
+
+async function popupFightSkullKing(){
+    await delay(speed);
+    document.querySelector('.bg-modal-skullKing').style.display = "flex";
+}
 
 
 //Close Popups
 function closePopupZombie(){
     let close = document.querySelector('.close');
     close.addEventListener("click", () => {
-    musicFightStop();
+    musicVictoryStop();
+    musicDefeatStop();
     document.querySelector('.bg-modal-zombie').style.display = "none";
-    //document.querySelector('.bg-modal-darkKnight').style.display = "none";
+    clearInterval(refreshInterval);
     });
 }
 
 function closePopupDarkKnight(){
     let close = document.querySelector('.close-two');
     close.addEventListener("click", () => {
-    musicFightStop();
-    //document.querySelector('.bg-modal-zombie').style.display = "none";
+    musicVictoryStop();
+    musicDefeatStop();
     document.querySelector('.bg-modal-darkKnight').style.display = "none";
+    clearInterval(refreshInterval);
+    });
+}
+
+function closePopupDarkLord(){
+    let close = document.querySelector('.close-three');
+    close.addEventListener("click", () => {
+    musicVictoryStop();
+    musicDefeatStop();
+    document.querySelector('.bg-modal-darkLord').style.display = "none";
+    clearInterval(refreshInterval);
+    });
+}
+
+function closePopupSkullKing(){
+    let close = document.querySelector('.close-four');
+    close.addEventListener("click", () => {
+    musicVictoryStop();
+    musicDefeatStop();
+    document.querySelector('.bg-modal-skullKing').style.display = "none";
+    clearInterval(refreshInterval);
     });
 }
 
@@ -217,15 +285,277 @@ function closePopupDarkKnight(){
 // ------------------------------------------------------------------------------------------------------------------------ //
 
 
+let refreshInterval;
+
+// Win / Lose fights
+
+// -----------------------------------  Zombie --------------------------------------------------------- //
+
+// Zombie Win
+async function zombieWin(){
+    await delay(speed);
+    musicVictoryPlay();
+    swalSaveCustomStyle.fire({
+        title: 'You Won!',
+        text: 'You earned:  15 XP and 10 Gold',
+        imageUrl: '../assets/img/Lulu-Win.png',
+        imageWidth: 50,
+        imageHeight: 70,
+        imageAlt: 'Custom image',
+      })
+      refreshInterval = setInterval(() => {
+
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}"  class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+    }, 1000);
+
+         lulu.xp += 15;
+         gold += 10;
+      
+}
+
+// Zombie Lose
+async function zombieLose(){
+    await delay(speed);
+    musicDefeatPlay();
+    swalSaveCustomStyle.fire({
+        title: 'You lost!',
+        text: 'You earned:  0 XP and 0 Gold',
+        imageUrl: '../assets/img/Lulu-Lose.png',
+        imageWidth: 70,
+        imageHeight: 50,
+        imageAlt: 'Custom image',
+      })
+      refreshInterval = setInterval(() => {
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}"  class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+         }, 1000);
+        lulu.xp += 0;
+        gold += 0;
+      
+}
+
+// -----------------------------------  Dark Knight --------------------------------------------------------- //
+
+// Dark Knight Win
+async function darkKnightWin(){
+    await delay(speed);
+    musicVictoryPlay();
+    swalSaveCustomStyle.fire({
+        title: 'You Won!',
+        text: 'You earned:  25 XP and 20 Gold',
+        imageUrl: '../assets/img/Lulu-Win.png',
+        imageWidth: 50,
+        imageHeight: 70,
+        imageAlt: 'Custom image',
+      })
+      refreshInterval = setInterval(() => {
+
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}"  class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${cundo.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${cundo.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${cundo.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+         }, 1000);
+
+         lulu.xp += 25;
+         gold += 20;
+      
+}
+
+// Dark Knight Lose
+async function darkKnightLose(){
+    await delay(speed);
+    musicDefeatPlay();
+    swalSaveCustomStyle.fire({
+        title: 'You Lost!',
+        text: 'You earned:  0 XP and 0 Gold',
+        imageUrl: '../assets/img/Lulu-Lose.png',
+        imageWidth: 70,
+        imageHeight: 50,
+        imageAlt: 'Custom image',
+      })
+      refreshInterval = setInterval(() => {
+
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}"  class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+         }, 1000);
+
+         lulu.xp += 0;
+         gold += 0;
+      
+}
+
+// -----------------------------------  Dark Lord --------------------------------------------------------- //
+
+// Dark Lord Win
+async function darkLordWin(){
+    await delay(speed);
+    musicVictoryPlay();
+    swalSaveCustomStyle.fire({
+        title: 'You Won!',
+        text: 'You earned:  40 XP and 30 Gold',
+        imageUrl: '../assets/img/Lulu-Win.png',
+        imageWidth: 50,
+        imageHeight: 70,
+        imageAlt: 'Custom image',
+      })
+      refreshInterval = setInterval(() => {
+
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}"  class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+         }, 1000);
+
+         lulu.xp += 40;
+         gold += 30;
+      
+}
+
+// Dark King Lose
+async function darkLordLose(){
+    await delay(speed);
+    musicDefeatPlay();
+    swalSaveCustomStyle.fire({
+        title: 'You lost!',
+        text: 'You earned:  0 XP and 0 Gold',
+        imageUrl: '../assets/img/Lulu-Lose.png',
+        imageWidth: 70,
+        imageHeight: 50,
+        imageAlt: 'Custom image',
+      })
+      refreshInterval = setInterval(() => {
+
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}" class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/  id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+         }, 1000);
+
+         lulu.xp += 0;
+         gold += 0;
+      
+}
+
+// -----------------------------------  Skull King --------------------------------------------------------- //
+
+// Skull King Win
+async function skullKingWin(){
+    await delay(speed);
+    musicVictoryPlay();
+    swalSaveCustomStyle.fire({
+        title: 'You Won!',
+        text: 'You earned:  50 XP and 50 Gold',
+        imageUrl: '../assets/img/Lulu-Win.png',
+        imageWidth: 50,
+        imageHeight: 70,
+        imageAlt: 'Custom image',
+      })
+      refreshInterval = setInterval(() => {
+
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}"  class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+         }, 1000);
+
+         lulu.xp += 50;
+         gold += 50;
+      
+}
+
+// Skull King Lose
+async function skullKingLose(){
+    await delay(speed);
+    musicDefeatPlay();
+    swalSaveCustomStyle.fire({
+        title: 'You lost!',
+        text: 'You earned:  0 XP and 0 Gold',
+        imageUrl: '../assets/img/Lulu-Lose.png',
+        imageWidth: 70,
+        imageHeight: 50,
+        imageAlt: 'Custom image',
+      })
+      refreshInterval = setInterval(() => {
+
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}"  class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+         }, 1000);
+
+         lulu.xp += 0;
+         gold += 0;
+      
+}
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
 
 //Xp System
 //Levels
 
 let levelOne = 0;
-let levelTwo = 100;
-let levelThree = 300;
-let levelFour = 500;
-let levelFive = 800;
+let levelTwo = 90;
+let levelThree = 190;
+let levelFour = 390;
+let levelFive = 590;
 
 function xpSystem(){
     
@@ -252,20 +582,14 @@ function xpSystem(){
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
 
-//Refresh stats on DOM
+// Delay / Backend "Simulator"
 
-setInterval(() => {
-   
-    document.getElementById("three").innerHTML = `
-    <img src="${lulu.icon}" class="cundo-icon"/>
-    <br>
-    <h3><img src="../assets/img/cundo-level.png"/ class="icon-level">${lulu.level}</h3>
-    <h3><img src="../assets/img/cundo-atk-icon.png"/ class="icon-atk">${lulu.atk}</h3>
-    <h3><img src="../assets/img/exp-icon.png"/ class="icon-xp">${lulu.xp}</h3>
-    <h3><img src="../assets/img/gold-icon.png"/ class="icon-gold"> ${gold}</h3>
-    <br>
-`;
- }, 1000)
+let speed = 1500;
+
+function delay(ms) {
+    return new Promise((response) => setTimeout(response, ms))
+}
+
 
  // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
@@ -273,15 +597,19 @@ setInterval(() => {
 
 //Save / Load progress
 
-//Save / Load progress
-
 //Save
 const swalSaveCustomStyle = Swal.mixin({
     customClass: {
-        title: 'sweetFont',
+        title: 'sweetFont', 
+        confirmButton: 'sweetFont',
+        text:'sweetFont',
+        denyButton: 'sweetFont',
+        cancelButton: 'sweetFont'
     },
     buttonsStyling: true
 })
+
+let timerInterval;
 
 function saveGameLulu(){
     swalSaveCustomStyle.fire({
@@ -291,10 +619,21 @@ function saveGameLulu(){
         confirmButtonText: 'Save',
         denyButtonText: `Don't save`,
       }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-        localStorage.setItem("char-three", JSON.stringify(lulu));
-        swalSaveCustomStyle.fire('Saved!', '', 'success');
+        /* isConfirmed - isDenied */     
+        if (result.isConfirmed){
+            swalSaveCustomStyle.fire({
+                title: 'Saving...',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                willClose: () => {
+                    clearInterval(timerInterval);
+                    swalSaveCustomStyle.fire('Saved!', '', 'success');
+                    localStorage.setItem("char-three", JSON.stringify(lulu));
+                }
+              })
+              
+
         } else if (result.isDenied) {
         swalSaveCustomStyle.fire(`You didn't save`, '', 'info');
         }
@@ -303,18 +642,38 @@ function saveGameLulu(){
 }
 
 
+let refreshIntervalLoad;
+
 //Load
 function loadGameLulu(){
-    lulu = JSON.parse(localStorage.getItem("char-three"));
+    
     swalSaveCustomStyle.fire({
         position: 'center',
         width: 400,
         icon: 'success',
         title: 'Your character loaded correctly!',
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+        timerProgressBar: true
+      });
+      lulu = JSON.parse(localStorage.getItem("char-three"));
+        refreshIntervalLoad = setInterval(() => {
+
+        document.getElementById("three").innerHTML = `
+        <img src="${lulu.icon}" class="cundo-icon"/>
+        <br>
+        <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+        <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+        <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+        <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+        <br>
+        
+        `;
+
+        clearInterval(refreshIntervalLoad);
+         }, 1000);
 }
+
 
 let save = document.getElementById('save');
 save.addEventListener("click", saveGameLulu);
@@ -350,9 +709,12 @@ function closePopupShop(){
 
 document.getElementById('modal-shop').innerHTML = `
 <img src="../assets/img/close.png" class="close-shop">
-<button id="itemOne">Buy Sword</button>
-<button id="itemTwo">Buy Sword</button>
-<button id="itemThree">Buy Sword</button>
+<div class="itemsShop">
+<div class="swordOne"><img class="sword" src="../assets/img/longsword.png"/><p class="shopStat">ATK +1</p><p class="shopStat">100 Gold</p><button id="itemOne">Buy Sword</button></div>
+<div class="swordTwo"><img class="sword" src="../assets/img/icebrand.png"/><p class="shopStat">ATK +2</p><p class="shopStat">200 Gold</p><button id="itemTwo">Buy Sword</button></div>
+<div class="swordThree"><img class="sword" src="../assets/img/save-the-queen.png"/><p class="shopStat">ATK +4</p><p class="shopStat">400 Gold</p><button id="itemThree">Buy Sword</button></div>
+</div>
+
 `;
 
 function itemAtkLulu(){
@@ -362,4 +724,52 @@ function itemAtkLulu(){
     }
 }
 
+function itemAtkTwoLulu(){
+    if(lulu.level >= 3 && gold >= 200){
+        gold >= 200 ? lulu.atk += 2  : lulu.atk += 0;
+        gold ? gold -= 100 : gold -= 0;
+    }
+}
+
+function itemAtkThreeLulu(){
+    if(lulu.level >= 4 && gold >= 400){
+        gold >= 400 ? lulu.atk += 4  : lulu.atk += 0;
+        gold ? gold -= 100 : gold -= 0;
+    }
+}
+
 document.getElementById('itemOne').addEventListener("click", itemAtkLulu);
+document.getElementById('itemTwo').addEventListener("click", itemAtkTwoLulu);
+document.getElementById('itemThree').addEventListener("click", itemAtkThreeLulu);
+
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+// -------------------------------------------------- Fetch ----------------------------------------------------------------- //
+
+fetch("../resources/iconsInfo.JSON")
+    .then(response => response.json())
+    .then(data => {
+    document.getElementById('shopInfo').innerHTML = `
+        ${data.shop}
+    `;
+}); 
+
+
+// ------------------------------------------------------------------------------------------------------------------------ //
+
+// Shop Info
+
+function showInfoShop() {
+    document.querySelector('#shopInfo').style.display = "flex";
+}
+
+function hideInfoShop() {
+    document.querySelector('#shopInfo').style.display = "none";
+}
+
+document.querySelector("#shop").addEventListener("mouseover",showInfoShop);
+
+document.querySelector("#shop").addEventListener("mouseout", hideInfoShop);

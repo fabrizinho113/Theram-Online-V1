@@ -23,7 +23,7 @@ export class Enemy{
     }
 }
 
-export let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 3);
+export let zombie = new Enemy ("../assets/img/zombie.png","Zombie", 6);
 
 export let darkKnight = new Enemy ("../assets/img/dark-knight.png","Dark Knight", 12);
 

@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theram Online V1 - Character Creation</title>
     <!--CSS-->
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <header>
         <nav class="container">
-            <a href="#" class="logo">Theram <span>Online</span> 1</a>
             <div class="menu">
                 <ul>
                     <li>
-                        <a href="character-select.html" class="nav-link">Select another character</a>
+                        <a href="character-select.html" class="nav-link-char">Select another character</a>
                     </li>
                     <li>
                         <div id="three" class="character"></div>
@@ -26,6 +26,7 @@
                 </ul>
             </div>
         </nav>
+        <div id="shopInfo"></div>
     </header>
 
     <section class="map">
@@ -52,10 +53,21 @@
         </div>
     </div>
 
+    <div class="bg-modal-darkLord">
+        <div id="modal-dark-lord" class="modal-popup-three">
+        </div>
+    </div>
+
+    <div class="bg-modal-skullKing">
+        <div id="modal-skull-king" class="modal-popup-four">
+        </div>
+    </div>
+
     <div class="bg-shop">
         <div id="modal-shop" class="modal-shop">
         </div>
     </div>
+
 
     <!--Scripts-->
     <script src="../js/sweetalert2.all.min.js"></script>
