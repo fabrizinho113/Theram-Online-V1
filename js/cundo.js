@@ -632,6 +632,7 @@ function saveGameCundo(){
                     clearInterval(timerInterval);
                     swalSaveCustomStyle.fire('Saved!', '', 'success');
                     localStorage.setItem("char", JSON.stringify(cundo));
+                    localStorage.setItem("goldOne", JSON.stringify(gold));
                 }
               })
               
@@ -658,6 +659,7 @@ function loadGameCundo(){
         timerProgressBar: true
       });
       cundo = JSON.parse(localStorage.getItem("char"));
+      gold = JSON.parse(localStorage.getItem("goldOne"));
         refreshIntervalLoad = setInterval(() => {
 
         document.getElementById("one").innerHTML = `
@@ -710,31 +712,139 @@ function closePopupShop(){
 document.getElementById('modal-shop').innerHTML = `
 <img src="../assets/img/close.png" class="close-shop">
 <div class="itemsShop">
-<div class="swordOne"><img class="sword" src="../assets/img/longsword.png"/><p class="shopStat">ATK +1</p><p class="shopStat">100 Gold</p><button id="itemOne">Buy Sword</button></div>
-<div class="swordTwo"><img class="sword" src="../assets/img/icebrand.png"/><p class="shopStat">ATK +2</p><p class="shopStat">200 Gold</p><button id="itemTwo">Buy Sword</button></div>
-<div class="swordThree"><img class="sword" src="../assets/img/save-the-queen.png"/><p class="shopStat">ATK +4</p><p class="shopStat">400 Gold</p><button id="itemThree">Buy Sword</button></div>
+<div class="swordOne"><img class="sword" src="../assets/img/longsword.png"/><p class="shopStat">ATK +1 (Available at level 2)</p><p class="shopStat">100 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemOne">Buy Sword</button></div>
+<div class="swordTwo"><img class="sword" src="../assets/img/icebrand.png"/><p class="shopStat">ATK +2 (Available at level 3)</p><p class="shopStat">200 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemTwo">Buy Sword</button></div>
+<div class="swordThree"><img class="sword" src="../assets/img/save-the-queen.png"/><p class="shopStat">ATK +4 (Available at level 4)</p><p class="shopStat">400 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemThree">Buy Sword</button></div>
 </div>
 
 `;
 
 function itemAtkCundo(){
     if(cundo.level >= 2 && gold >= 100){
-        gold >= 100 ? cundo.atk += 1  : cundo.atk += 0;
-        gold ? gold -= 100 : gold -= 0;
+        gold >= 100 && purchaseComplete();
+
+        setInterval(() => {
+
+            document.getElementById("one").innerHTML = `
+            <img src="${cundo.icon}" class="cundo-icon"/>
+            <br>
+            <h3><img src="../assets/img/cundo-level.png"/ id="char" class="icon-level">${cundo.level}</h3>
+            <h3><img src="../assets/img/cundo-atk-icon.png"/ id="attack" class="icon-atk">${cundo.atk}</h3>
+            <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${cundo.xp}</h3>
+            <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+            <br>
+            
+            `;
+    
+            clearInterval();
+             }, 1000);
+    } else {
+        purchaseFail();
     }
+
+    function purchaseComplete(){
+        swalSaveCustomStyle.fire(
+            'Purchase complete!',
+            '',
+            'success'
+        )
+        gold -= 100;
+        cundo.atk += 1;
+    }
+
+    function purchaseFail(){
+        swalSaveCustomStyle.fire(
+            'Not enough gold or level',
+            '',
+            'error'
+          )
+        
+    }
+
 }
 
 function itemAtkTwoCundo(){
     if(cundo.level >= 3 && gold >= 200){
-        gold >= 200 ? cundo.atk += 2  : cundo.atk += 0;
-        gold ? gold -= 100 : gold -= 0;
+        gold >= 200 && purchaseComplete();
+
+        setInterval(() => {
+
+            document.getElementById("one").innerHTML = `
+            <img src="${cundo.icon}" class="cundo-icon"/>
+            <br>
+            <h3><img src="../assets/img/cundo-level.png"/ id="char" class="icon-level">${cundo.level}</h3>
+            <h3><img src="../assets/img/cundo-atk-icon.png"/ id="attack" class="icon-atk">${cundo.atk}</h3>
+            <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${cundo.xp}</h3>
+            <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+            <br>
+            
+            `;
+    
+            clearInterval();
+             }, 1000);
+    } else {
+        purchaseFail();
+    }
+
+    function purchaseComplete(){
+        swalSaveCustomStyle.fire(
+            'Purchase complete!',
+            '',
+            'success'
+        )
+        gold -= 200;
+        cundo.atk += 2;
+    }
+
+    function purchaseFail(){
+        swalSaveCustomStyle.fire(
+            'Not enough gold or level',
+            '',
+            'error'
+          )
+        
     }
 }
 
 function itemAtkThreeCundo(){
     if(cundo.level >= 4 && gold >= 400){
-        gold >= 400 ? cundo.atk += 4  : cundo.atk += 0;
-        gold ? gold -= 100 : gold -= 0;
+        gold >= 400 && purchaseComplete();
+
+        setInterval(() => {
+
+            document.getElementById("one").innerHTML = `
+            <img src="${cundo.icon}" class="cundo-icon"/>
+            <br>
+            <h3><img src="../assets/img/cundo-level.png"/ id="char" class="icon-level">${cundo.level}</h3>
+            <h3><img src="../assets/img/cundo-atk-icon.png"/ id="attack" class="icon-atk">${cundo.atk}</h3>
+            <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${cundo.xp}</h3>
+            <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+            <br>
+            
+            `;
+    
+            clearInterval();
+             }, 1000);
+    } else {
+        purchaseFail();
+    }
+
+    function purchaseComplete(){
+        swalSaveCustomStyle.fire(
+            'Purchase complete!',
+            '',
+            'success'
+        )
+        gold -= 400;
+        cundo.atk += 4;
+    }
+
+    function purchaseFail(){
+        swalSaveCustomStyle.fire(
+            'Not enough gold or level',
+            '',
+            'error'
+          )
     }
 }
 

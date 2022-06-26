@@ -630,6 +630,7 @@ function saveGameLulu(){
                     clearInterval(timerInterval);
                     swalSaveCustomStyle.fire('Saved!', '', 'success');
                     localStorage.setItem("char-three", JSON.stringify(lulu));
+                    localStorage.setItem("goldThree", JSON.stringify(gold));
                 }
               })
               
@@ -657,6 +658,7 @@ function loadGameLulu(){
         timerProgressBar: true
       });
       lulu = JSON.parse(localStorage.getItem("char-three"));
+      gold = JSON.parse(localStorage.getItem("goldThree"));
         refreshIntervalLoad = setInterval(() => {
 
         document.getElementById("three").innerHTML = `
@@ -710,31 +712,138 @@ function closePopupShop(){
 document.getElementById('modal-shop').innerHTML = `
 <img src="../assets/img/close.png" class="close-shop">
 <div class="itemsShop">
-<div class="swordOne"><img class="sword" src="../assets/img/longsword.png"/><p class="shopStat">ATK +1</p><p class="shopStat">100 Gold</p><button id="itemOne">Buy Sword</button></div>
-<div class="swordTwo"><img class="sword" src="../assets/img/icebrand.png"/><p class="shopStat">ATK +2</p><p class="shopStat">200 Gold</p><button id="itemTwo">Buy Sword</button></div>
-<div class="swordThree"><img class="sword" src="../assets/img/save-the-queen.png"/><p class="shopStat">ATK +4</p><p class="shopStat">400 Gold</p><button id="itemThree">Buy Sword</button></div>
+<div class="swordOne"><img class="sword" src="../assets/img/staffOne.png"/><p class="shopStat">ATK +1 (Available at level 2)</p><p class="shopStat">100 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemOne">Buy Staff</button></div>
+<div class="swordTwo"><img class="sword" src="../assets/img/staffTwo.png"/><p class="shopStat">ATK +2 (Available at level 3)</p><p class="shopStat">200 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemTwo">Buy Staff</button></div>
+<div class="swordThree"><img class="sword" src="../assets/img/staffThree.png"/><p class="shopStat">ATK +4 (Available at level 4)</p><p class="shopStat">400 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemThree">Buy Staff</button></div>
 </div>
 
 `;
 
 function itemAtkLulu(){
     if(lulu.level >= 2 && gold >= 100){
-        gold >= 100 ? lulu.atk += 1  : lulu.atk += 0;
-        gold ? gold -= 100 : gold -= 0;
+        gold >= 100 && purchaseComplete();
+        setInterval(() => {
+
+            document.getElementById("three").innerHTML = `
+            <img src="${lulu.icon}" class="cundo-icon"/>
+            <br>
+            <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+            <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+            <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+            <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+            <br>
+            
+            `;
+    
+            clearInterval();
+             }, 1000);
+    } else {
+        purchaseFail();
+    }
+
+    function purchaseComplete(){
+        swalSaveCustomStyle.fire(
+            'Purchase complete!',
+            '',
+            'success'
+        )
+        gold -= 100;
+        lulu.atk += 1;
+    }
+
+    function purchaseFail(){
+        swalSaveCustomStyle.fire(
+            'Not enough gold or level',
+            '',
+            'error'
+          )
+        
     }
 }
 
 function itemAtkTwoLulu(){
     if(lulu.level >= 3 && gold >= 200){
-        gold >= 200 ? lulu.atk += 2  : lulu.atk += 0;
-        gold ? gold -= 100 : gold -= 0;
+        gold >= 200 &&  purchaseComplete();
+
+        setInterval(() => {
+
+            document.getElementById("three").innerHTML = `
+            <img src="${lulu.icon}" class="cundo-icon"/>
+            <br>
+            <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+            <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+            <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+            <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+            <br>
+            
+            `;
+    
+            clearInterval();
+             }, 1000);
+    } else {
+        purchaseFail();
+    }
+
+    function purchaseComplete(){
+        swalSaveCustomStyle.fire(
+            'Purchase complete!',
+            '',
+            'success'
+        )
+        gold -= 200;
+        lulu.atk += 2;
+    }
+
+    function purchaseFail(){
+        swalSaveCustomStyle.fire(
+            'Not enough gold or level',
+            '',
+            'error'
+          )
+        
     }
 }
 
 function itemAtkThreeLulu(){
     if(lulu.level >= 4 && gold >= 400){
-        gold >= 400 ? lulu.atk += 4  : lulu.atk += 0;
-        gold ? gold -= 100 : gold -= 0;
+        gold >= 400 && purchaseComplete();
+
+        setInterval(() => {
+
+            document.getElementById("three").innerHTML = `
+            <img src="${lulu.icon}" class="cundo-icon"/>
+            <br>
+            <h3><img src="../assets/img/lulu-level.png"/ id="char" class="icon-level">${lulu.level}</h3>
+            <h3><img src="../assets/img/lulu-atk-icon.png"/ id="attack" class="icon-atk">${lulu.atk}</h3>
+            <h3><img src="../assets/img/exp-icon.png"/ id="exp" class="icon-xp">${lulu.xp}</h3>
+            <h3><img src="../assets/img/gold-icon.png"/ id="gold" class="icon-gold"> ${gold}</h3>
+            <br>
+            
+            `;
+    
+            clearInterval();
+             }, 1000);
+    } else {
+        purchaseFail();
+    }
+
+    function purchaseComplete(){
+        swalSaveCustomStyle.fire(
+            'Purchase complete!',
+            '',
+            'success'
+        )
+        gold -= 400;
+        lulu.atk += 4;
+    }
+
+    function purchaseFail(){
+        swalSaveCustomStyle.fire(
+            'Not enough gold or level',
+            '',
+            'error'
+          )
+        
     }
 }
 
