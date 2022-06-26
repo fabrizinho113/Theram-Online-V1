@@ -8,10 +8,12 @@
     src: url(../assets/fonts/PixelGameFont.ttf);
 }
 
-*, *::before, *::after{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -moz-margin:0px; 
+    -webkit-margin:0px;
 }
 
 body {
@@ -194,9 +196,9 @@ header .logo {
     font-family: 'PixelGameFont', sans-serif;
     padding: 18rem 0;
     width: 100%;
+    height: 100%;
     overflow: hidden;
     background: url('../assets/img/background-characterSelect.png');
-    height: 100vh;
     /*font-family: 'Augusta', sans-serif;*/
 }
 
