@@ -13,3 +13,4 @@ en base a ese navegador, con Chrome y Edge pueden haber pequeños problemas visu
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=fabrizinho113&show_icons=true&locale=en" alt="fabrizinho113" /></p>
 
+<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=fabrizinho113&show_icons=true&locale=en&layout=compact" alt="fabrizinho113" /></p>
