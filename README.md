@@ -24,8 +24,11 @@ Con cada personaje puedes guardar y/o cargar tu progreso con los botones de Save
 ## Niveles:
 
 Nivel 1 a 2: 100 de Experiencia
+<br>
 Nivel 2 a 3: 200 de Experiencia
+<br>
 Nivel 3 a 4: 400 de Experiencia
+<br>
 Nivel 4 a 5: 600 de Experiencia
 
 ACLARACION: Debido a que se trata de simular el "backend" con el setInterval para actualizar los datos mostrados en el DOM, el nivel se muestra correctamente luego de pelear una vez mas (sin importar el resultado). Esto solo afecta al nivel en terminos visuales, los demas atributos como el oro y la experiencia se muestran correctamente siempre.
