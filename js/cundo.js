@@ -299,7 +299,7 @@ async function zombieWin(){
     musicVictoryPlay();
     swalSaveCustomStyle.fire({
         title: 'You Won!',
-        text: 'You earned:  15 XP and 10 Gold',
+        text: 'You earned:  24 XP and 30 Gold',
         imageUrl: '../assets/img/Cundo-Win.png',
         imageWidth: 50,
         imageHeight: 70,
@@ -319,8 +319,8 @@ async function zombieWin(){
         `;
     }, 1000);
 
-         cundo.xp += 15;
-         gold += 10;
+    cundo.xp += 24;
+    gold += 30;
       
 }
 
@@ -362,7 +362,7 @@ async function darkKnightWin(){
     musicVictoryPlay();
     swalSaveCustomStyle.fire({
         title: 'You Won!',
-        text: 'You earned:  25 XP and 20 Gold',
+        text: 'You earned:  35 XP and 30 Gold',
         imageUrl: '../assets/img/Cundo-Win.png',
         imageWidth: 50,
         imageHeight: 70,
@@ -382,8 +382,8 @@ async function darkKnightWin(){
         `;
          }, 1000);
 
-         cundo.xp += 25;
-         gold += 20;
+         cundo.xp += 35;
+         gold += 30;
       
 }
 
@@ -426,7 +426,7 @@ async function darkLordWin(){
     musicVictoryPlay();
     swalSaveCustomStyle.fire({
         title: 'You Won!',
-        text: 'You earned:  40 XP and 30 Gold',
+        text: 'You earned:  47 XP and 70 Gold',
         imageUrl: '../assets/img/Cundo-Win.png',
         imageWidth: 50,
         imageHeight: 70,
@@ -446,8 +446,8 @@ async function darkLordWin(){
         `;
          }, 1000);
 
-         cundo.xp += 40;
-         gold += 30;
+         cundo.xp += 47;
+         gold += 70;
       
 }
 
@@ -490,7 +490,7 @@ async function skullKingWin(){
     musicVictoryPlay();
     swalSaveCustomStyle.fire({
         title: 'You Won!',
-        text: 'You earned:  50 XP and 50 Gold',
+        text: 'You earned:  100 XP and 100 Gold',
         imageUrl: '../assets/img/Cundo-Win.png',
         imageWidth: 50,
         imageHeight: 70,
@@ -510,8 +510,8 @@ async function skullKingWin(){
         `;
          }, 1000);
 
-         cundo.xp += 50;
-         gold += 50;
+         cundo.xp += 100;
+         gold += 100;
       
 }
 
@@ -579,6 +579,7 @@ function xpSystem(){
     }
 
 }
+
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
 // ------------------------------------------------------------------------------------------------------------------------ //
@@ -709,12 +710,13 @@ function closePopupShop(){
     });
 }
 
+
 document.getElementById('modal-shop').innerHTML = `
 <img src="../assets/img/close.png" class="close-shop">
 <div class="itemsShop">
-<div class="swordOne"><img class="sword" src="../assets/img/longsword.png"/><p class="shopStat">ATK +1 (Available at level 2)</p><p class="shopStat">100 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemOne">Buy Sword</button></div>
-<div class="swordTwo"><img class="sword" src="../assets/img/icebrand.png"/><p class="shopStat">ATK +2 (Available at level 3)</p><p class="shopStat">200 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemTwo">Buy Sword</button></div>
-<div class="swordThree"><img class="sword" src="../assets/img/save-the-queen.png"/><p class="shopStat">ATK +4 (Available at level 4)</p><p class="shopStat">400 Gold</p><p class="shopStat">Unlimited Stock</p><button id="itemThree">Buy Sword</button></div>
+<div class="swordOne"><img class="sword" src="../assets/img/longsword.png"/><p class="shopStat">ATK +1 (Available at level 2)</p><p class="shopStat">100 Gold</p><p class="shopStat">Stock: Unlimited</p><button id="itemOne">Buy Sword</button></div>
+<div class="swordTwo"><img class="sword" src="../assets/img/icebrand.png"/><p class="shopStat">ATK +2 (Available at level 3)</p><p class="shopStat">200 Gold</p><p class="shopStat">Stock: Unlimited</p><button id="itemTwo">Buy Sword</button></div>
+<div class="swordThree"><img class="sword" src="../assets/img/save-the-queen.png"/><p class="shopStat">ATK +4 (Available at level 4)</p><p class="shopStat">400 Gold</p><p class="shopStat">Stock: Unlimited</p><button id="itemThree">Buy Sword</button></div>
 </div>
 
 `;

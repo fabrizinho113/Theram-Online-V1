@@ -297,7 +297,7 @@ async function zombieWin(){
     musicVictoryPlay();
     swalSaveCustomStyle.fire({
         title: 'You Won!',
-        text: 'You earned:  15 XP and 10 Gold',
+        text: 'You earned:  24 XP and 30 Gold',
         imageUrl: '../assets/img/Lulu-Win.png',
         imageWidth: 50,
         imageHeight: 70,
@@ -317,8 +317,8 @@ async function zombieWin(){
         `;
     }, 1000);
 
-         lulu.xp += 15;
-         gold += 10;
+         lulu.xp += 24;
+         gold += 30;
       
 }
 
@@ -359,7 +359,7 @@ async function darkKnightWin(){
     musicVictoryPlay();
     swalSaveCustomStyle.fire({
         title: 'You Won!',
-        text: 'You earned:  25 XP and 20 Gold',
+        text: 'You earned:  35 XP and 30 Gold',
         imageUrl: '../assets/img/Lulu-Win.png',
         imageWidth: 50,
         imageHeight: 70,
@@ -379,8 +379,8 @@ async function darkKnightWin(){
         `;
          }, 1000);
 
-         lulu.xp += 25;
-         gold += 20;
+         lulu.xp += 35;
+         gold += 30;
       
 }
 
@@ -423,7 +423,7 @@ async function darkLordWin(){
     musicVictoryPlay();
     swalSaveCustomStyle.fire({
         title: 'You Won!',
-        text: 'You earned:  40 XP and 30 Gold',
+        text: 'You earned:  47 XP and 70 Gold',
         imageUrl: '../assets/img/Lulu-Win.png',
         imageWidth: 50,
         imageHeight: 70,
@@ -443,8 +443,8 @@ async function darkLordWin(){
         `;
          }, 1000);
 
-         lulu.xp += 40;
-         gold += 30;
+         lulu.xp += 47;
+         gold += 70;
       
 }
 
@@ -487,7 +487,7 @@ async function skullKingWin(){
     musicVictoryPlay();
     swalSaveCustomStyle.fire({
         title: 'You Won!',
-        text: 'You earned:  50 XP and 50 Gold',
+        text: 'You earned:  100 XP and 100 Gold',
         imageUrl: '../assets/img/Lulu-Win.png',
         imageWidth: 50,
         imageHeight: 70,
@@ -507,8 +507,8 @@ async function skullKingWin(){
         `;
          }, 1000);
 
-         lulu.xp += 50;
-         gold += 50;
+         lulu.xp += 100;
+         gold += 100;
       
 }
 
