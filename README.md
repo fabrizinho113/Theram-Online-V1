@@ -45,6 +45,12 @@ Se hizo pocos comentarios detallando funciones o variables ya que el nombre que 
 
 Los archivos (assets) elegi que sean en formatos PNG debido a su peso e impacto a la hora de tener fondo transparentes.
 
+## Paginas HTML
+
+- Index: Cumple la funcion de dar un pantallo y breve descripcion de todo lo mencionado en este readme
+- Character Select: Seleccionar un personaje. Se agrego un "boton" para sileciar la musica en caso de que resulte molesta para el usuario
+- Cundo, Reyna y Lulu: Cada personaje tiene su propio HTML
+
 ## Opinion/critica personal
 
 El proyecto, al principio, era tener los tres personajes pero que cada modal (popup) aparezca un menu de acciones para que el personaje realice una accion (Utilizar ataques, items o huir de la pelea) y tener un simulador RPG por turno al estilo Pokemon o de Final Fantasy viejos. Debido a que la proyeccion inicial era extremadamente ambiciosa y mis conocimientos aun no son suficientes para llevarlo a cabo de esa forma.
