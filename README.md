@@ -13,7 +13,7 @@ El proyecto en si es bastante simple: simular un "juego" click extremadamente se
 
 Con cada personaje puedes guardar y/o cargar tu progreso con los botones de Save y Load. Se recomienda guardar antes de salir para no perder ningun progreso.
 
-# Notas a tener en cuenta:
+## Notas a tener en cuenta:
 
 - No es responsive
 - Como se menciono antes, se recomienda usar Firefox como navegador.
