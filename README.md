@@ -7,7 +7,7 @@
 Proyecto final del curso de Javascript (CoderHouse). Primer proyecto hecho en Javascript (se recomienda usar el navegador Firefox ya que no es responsive y todo fue hecho
 en base a ese navegador, con Chrome y Edge pueden haber pequeños problemas visuales).
 
-## El proyecto
+# El proyecto
 
 El proyecto en si es bastante simple: simular un "juego" click extremadamente sencillo donde peleas con distintos monstruos, ganas experiencia y oro cada vez que ganas una pelea. Tienes la opcion de usar el oro para comprar items en la tienda aunque cada item tiene requisitos (tener cierto nivel y oro).
 
@@ -21,7 +21,7 @@ Con cada personaje puedes guardar y/o cargar tu progreso con los botones de Save
 - La estetica es extremadamente basica en todos los aspectos
 - Cuando se hace click en "Pelear"/"Fight" se tarda unos breves segundos en aparecer el resultado. Esto es para hacer una simulacion de backend de forma correcta.
 
-### Niveles:
+## Niveles:
 
 Nivel 1 a 2: 100 de Experiencia
 Nivel 2 a 3: 200 de Experiencia
@@ -30,13 +30,13 @@ Nivel 4 a 5: 600 de Experiencia
 
 ACLARACION: Debido a que se trata de simular el "backend" con el setInterval para actualizar los datos mostrados en el DOM, el nivel se muestra correctamente luego de pelear una vez mas (sin importar el resultado). Esto solo afecta al nivel en terminos visuales, los demas atributos como el oro y la experiencia se muestran correctamente siempre.
 
-### Librerias
+## Librerias
 
 Decidi aplicar la libreria de SweetAlert2 ya que su implementacion y funcionamiento es extremadamente facil y amigable para mi que es la primera vez que codeo. Se utiliza para comprobar elecciones del usuario, simular "backend" cuando se guarda el progreso, si se realiza una accion con exito, etc.
 
 Decidi hacer la instalacion con npm para empezar a estar familiarizado.
 
-### Codigo y archivos
+## Codigo y archivos
 
 Se hizo pocos comentarios detallando funciones o variables ya que el nombre que tiene cada una es explicita al funcionamiento que va a cumplir (por ejemplo victoryMusic, fightCundoZombie, closePopUpZombie) y se utilizo barras en los comentarios para que actuen como separador y separar por secciones. El objetivo de esos separadores es para que sea mas facil leer el codigo.
 
